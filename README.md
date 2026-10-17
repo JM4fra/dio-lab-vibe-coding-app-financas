@@ -1,85 +1,99 @@
-# 💸 App de Organização de Finanças Pessoais com Vibe Coding
+# 💸 App de Organização de Finanças Pessoais do João Mafra com Vibe Coding
 
-Aprenda a **criar soluções com IA** de forma criativa, guiando ferramentas como o **Copilot** e o **Lovable** com uma comunicação simples e natural. O foco é desenvolver o conceito de um **App de Organização de Finanças Pessoais**, mas, acima de tudo, aprender o **jeito Vibe de programar com IA**.
+```markdown
+- Seu **prompt final** (PRD);
 
-## ✨ O que é Vibe Coding
+Você é um Desenvolvedor Front-end Senior especialista em React, Tailwind CSS e UI/UX.
+Sua missão é construir um MVP completo e funcional de um App de Organização Financeira Conversacional em uma única resposta. O app deve ser construído "mobile-first" (centralizado na tela em desktops, simulando um celular).
 
-**Vibe Coding** é uma forma leve e criativa de desenvolver com IA, baseada em **conversas naturais e bem estruturadas**. Você não precisa escrever código linha por linha. Em vez disso, aprende a **guiar a IA** descrevendo suas ideias de forma clara, com **intenção e contexto**. Em outras palavras:
+# 1. Tech Stack e Bibliotecas
+- React (Componentes Funcionais e Hooks).
+- Tailwind CSS para estilização (Design limpo, minimalista, estilo Apple/Nubank, usando tons de verde esmeralda para ações principais).
+- Lucide React para ícones.
+- Recharts para os gráficos.
 
-> Você mostra a vibe da sua ideia e a IA transforma em solução (ou em um caminho para ela).
+# 2. Gerenciamento de Estado (Crucial)
+O app deve ser totalmente funcional na interface usando estados locais (useState/useContext) para simular o banco de dados. 
+Crie um estado global ou eleve o estado no componente principal para manter:
+- `transactions`: Array de objetos { id, type ('income' ou 'expense'), amount, category, description, date }. Inclua 3 transações falsas para começar.
+- `goals`: Array de objetos { id, title, target_amount, current_amount }. Inclua 1 meta falsa.
+- `balance`: Saldo atual calculado com base nas transações.
 
-## 🎯 Desafio
+# 3. Navegação
+Crie um Bottom Navigation Bar (Barra de navegação inferior) fixo com 3 abas: "Chat" (Principal), "Dashboard", e "Metas".
 
-Problema: Muitas pessoas não conseguem manter um controle financeiro porque os aplicativos exigem muita entrada de dados manual, e a criação de orçamentos é vista como algo tedioso. 
+# 4. Telas e Lógica
 
-Precisamos de uma solução que permita **controlar as finanças por meio de uma conversa simples**, com **agentes de IA** capazes de criar **planos de economia personalizados e automatizados**. Você deve utilizar as ideias de **Vibe Coding** e **MVP (Produto Mínimo Viável)** para desenvolver o **conceito de um aplicativo** que resolva o problema citado.
+## TELA 1: CHAT (Aba Principal)
+- Interface de chat estilo WhatsApp/iMessage.
+- Área de histórico de mensagens (balões do usuário à direita, balões da IA à esquerda).
+- Input de texto na parte inferior com botão de enviar.
+- LÓGICA DE SIMULAÇÃO DA IA (Importante): Quando o usuário digitar uma mensagem, crie uma função simples que busca números na string.
+  - Se a mensagem contiver um número (ex: "gastei 50 no mercado"), a "IA" deve responder automaticamente: "Anotado! Adicionei uma despesa de R$ 50. Seu novo saldo é X".
+  - A função deve adicionar automaticamente essa transação ao estado `transactions` e atualizar o `balance`.
 
-> [!IMPORTANT]
-> Você **não precisa construir o código**! O foco está em **usar a IA como sua parceira criativa**, transformando boas ideias e prompts em conceitos funcionais que simulam um produto real.
+## TELA 2: DASHBOARD (Visão Geral)
+- Exibir o Saldo Atual em destaque no topo.
+- Mostrar um Card com total de Receitas (verde) e total de Despesas (vermelho) do mês.
+- Renderizar um gráfico de pizza (PieChart do Recharts) agrupando as despesas por categoria. As categorias devem ser geradas dinamicamente com base no estado `transactions`.
 
-## 🪄 Etapas do Desafio
+## TELA 3: METAS
+- Uma lista de cards mostrando os objetivos financeiros.
+- Cada card deve ter: Título da Meta, Valor Atual / Valor Alvo, e uma barra de progresso (Progress Bar) preenchida proporcionalmente.
+- Um botão simples "+ Nova Meta" que abre um modal ou prompt para adicionar uma meta ao estado.
 
-### 1. Saber o que Pedir é a Chave! Otimize seus Prompts!
-
-Antes de pedir para a IA "criar um app", é importante definir com clareza o que você quer construir e por quê. Para isso, você vai criar um **PRD (Product Requirements Document)** simplificado, uma especificação que serve como _briefing_ para a IA entender sua ideia.
-
-Um bom PRD deve descrever o problema, quem será beneficiado, as principais funcionalidades e o que você espera que a IA entregue. Use o modelo abaixo como ponto de partida e adapte conforme o seu estilo:
-
-```txt
-# Contexto
-Quero criar um aplicativo de Organização de Finanças Pessoais que funcione por meio de conversas com o usuário.  
-A ideia é facilitar o controle financeiro de forma simples e natural, sem formulários manuais ou planilhas complexas.
-
-# Problema
-Muitas pessoas desistem de controlar seus gastos porque os apps atuais exigem muita entrada manual e pouca personalização.  
-Quero resolver isso com uma experiência de conversa e recomendações automáticas de economia.
-
-# Público-Alvo
-Pessoas que querem começar a organizar suas finanças de forma prática e sem complicação, principalmente iniciantes.
-
-# Funcionalidades-Chave
-1. Registrar gastos via chat em linguagem natural.  
-2. Classificar automaticamente as transações.  
-3. Definir e acompanhar metas financeiras.  
-4. Receber dicas de economia do “Agente Financeiro”.  
-5. Visualizar relatórios simples e personalizados.
-
-# Entregável da IA
-Gerar um plano de MVP com as principais telas, recursos necessários e um esboço de validação inicial.  
-Usar tom educativo e linguagem acessível, em português.
+# Regras Finais de Execução
+- Gere um código bonito, com padding adequado, bordas arredondadas (rounded-2xl) e sombras suaves.
+- Não deixe nenhuma funcionalidade de UI pela metade. O chat precisa rolar para baixo, os gráficos precisam renderizar os dados do estado, e a navegação entre as 3 telas deve funcionar perfeitamente sem recarregar a página.
+- O idioma da interface e da IA simulada deve ser o Português (PT-BR).
 ```
 
-Depois de preencher o modelo, use o Copilot Web para revisar e melhorar o seu prompt antes de ir ao Lovable. A ideia é lapidar o texto até que ele fique claro, direto e reflita exatamente a sua intenção.
 
-> [!TIP]
-> Pense no PRD/Prompt como “o briefing que a IA precisa para entender sua vibe”. Portanto, quanto mais claro e intencional for o texto, mais próximas do ideal serão as respostas da IA.
+## Prints ou pequenos vídeos das interações com a IA;
 
-### 2. Explorando o Lovable na Prática
+<img width="1920" height="1032" alt="image" src="https://github.com/user-attachments/assets/71ff07ac-9284-44e0-895f-207039a7b3cd" />
+<img width="1920" height="1032" alt="image" src="https://github.com/user-attachments/assets/69fc56c3-0b2c-467c-9826-09a48b39a229" />
 
-Com seu PRD pronto e revisado, é hora de colocar a IA em ação. Abra o Lovable, cole seu prompt completo e peça o plano inicial do MVP do seu aplicativo. Como o plano gratuito limita você a 5 interações por dia, seja estratégico:
-- Faça perguntas diretas e construtivas, como “crie o fluxo de telas com base nas funcionalidades listadas” ou “gere uma versão resumida do plano de MVP”;
-- Priorize clareza nas instruções para aproveitar ao máximo cada resposta;
+RESULTADO: https://id-preview--9fda111b-18ae-404b-a6be-5e5dea7278ef.lovable.app/?__lovable_receipt=mat_5z049dwh4j8mev1en484ab6h4t
 
-Durante essa etapa, você pode orientar a IA para três entregas principais:
-1. Agente Financeiro: defina o comportamento e o tom de voz de um consultor financeiro pessoal, alinhado ao público e objetivo do app.
-2. Fluxo de Telas: peça à IA para gerar o fluxo conceitual de telas com base nas funcionalidades descritas no PRD, simulando a interação por conversa.
-3. Plano de MVP: solicite um resumo das 5 funcionalidades principais, dos recursos necessários e um plano de validação inicial (como medir se o app cumpre seu propósito).
 
-> [!TIP]
-> Se preferir, você pode fazer tudo com o **Copilot**. O importante é exercitar a habilidade de transformar intenções em instruções claras e testar os limites da IA como parceira criativa.
+## Um resumo do que o seu **App de Finanças Pessoais** faz;
 
-### 3. Entregando o Desafio na DIO
+O Fina é um aplicativo de finanças pessoais focado em simplicidade, estruturado em formato mobile com três abas principais:
 
-Finalize seu projeto criando um **repositório no GitHub** (pode ser um **fork** deste).  
-No README do seu repositório, inclua:
+1. Chat (Assistente Fina)
+Lançamentos conversacionais: Você digita em linguagem natural (ex.: "gastei 50 no mercado", "recebi 200 de freela").
+Detecção inteligente: Identifica automaticamente se é receita ou despesa, extrai o valor e classifica na categoria correspondente (Mercado, Transporte, Alimentação, Moradia, Lazer, Saúde, Salário, etc.).
+Feedback instantâneo: A assistente confirma o registro e calcula o novo saldo em tempo real.
+2. Dashboard
+Visão Geral: Cartões com saldo total, receitas e despesas do mês.
+Gráfico de Categorias: Gráfico de pizza interativo mostrando a divisão percentual dos seus gastos.
+Histórico com Exclusão: Lista todas as movimentações mais recentes, com categoria, data e um botão de lixeira para remover registros adicionados por engano. Ao apagar um item, o saldo e os gráficos recalculam na hora.
+3. Metas Financeiras
+Acompanhamento de Objetivos: Criação de metas com valor alvo e valor já guardado (ex.: Reserva de emergência, Viagem).
+Barra de Progresso: Mostra visualmente a porcentagem atingida de cada objetivo.
+Gestão Completa: Botões para editar valores/títulos ou excluir metas existentes.
 
-- Seu **prompt final** (PRD);  
-- Prints ou pequenos vídeos das interações com a IA;  
-- Um resumo do que o seu **App de Finanças Pessoais** faz;  
-- Uma breve **reflexão sobre o processo**:
-  - O que funcionou bem?  
-  - O que não funcionou como o esperado?  
-  - O que aprendeu sobre conversar com IAs?
+
+## Uma breve **reflexão sobre o processo**:
+
+  ### O que funcionou bem?  
+Tradução rápida de requisitos (PRD para código): A transformação da proposta conceitual em uma interface funcional foi imediata. A IA estruturou a arquitetura em abas (Chat, Dashboard, Metas), adotou o padrão visual mobile e entregou componentes prontos para uso desde o primeiro rascunho.
+Processamento de linguagem natural simples e eficaz: A lógica de regex para categorização e extração de valores no chat ("gastei 50 no mercado") atendeu perfeitamente ao caso de uso sem precisar de chamadas pesadas de API externa.
+Iterações pontuais e modulares: Adicionar a edição/exclusão de metas e o histórico de transações com exclusão foi um processo cirúrgico: a base existente foi preservada enquanto novas funcionalidades e regras de recálculo reativo foram acopladas sem atrito.
+
+  
+  ### O que não funcionou como o esperado?  
+Erros de ciclo de vida e runtime (o bug do destroy is not a function): No React, um useEffect espera que o retorno seja exclusivamente uma função de limpeza (cleanup) ou undefined. Ao usar endRef.current?.scrollIntoView(), em versões recentes de alguns navegadores a chamada retorna um valor, fazendo o React interpretá-lo como cleanup e quebrar a tela ao trocar de aba.
+Atenção aos detalhes de compatibilidade: Bibliotecas de terceiros (como gráficos do Recharts e utilitários auxiliares) exigem atenção redobrada com tipos e dependências que não estão em uso para evitar quebras silenciosas no build inicial.
+Persistência de dados volátil: Como o estado foi mantido apenas em memória (useState), recarregar o navegador ainda reseta as transações e metas aos valores padrão — um ponto de melhoria natural para as próximas etapas.
+
+
+  
+  ### O que aprendeu sobre conversar com IAs?
+"Aprendi que quanto mais detalhes forneço, melhor ela trabalha, e uma conversa com IA é simples, fácil e prática.
+
+
 
 > [!TIP]
 > Publique seu repositório e compartilhe o link na plataforma da DIO! Sua entrega é a prova de que você domina o raciocínio de Vibe Coding, mesmo sem escrever uma única linha de código.
